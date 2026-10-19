@@ -86,10 +86,10 @@ If the main workflow fails, the alert email names the workflow, the node that fa
 
 ## Design decisions
 
-- **Simple over clever:** one Code node holds all the validation rules, which keeps the canvas short and the logic easy to read.
-- **Code calculates, AI writes:** this avoids arithmetic errors in the report.
-- **Bad data is kept, not deleted:** the Exceptions sheet gives a reviewer the reason for every rejected row.
-- **Failures are loud:** a dedicated alert workflow means a broken report never goes unnoticed.
+- **Simple:** one Code node holds all the validation rules, which keeps the canvas short and the logic easy to read.
+- **The Code calculates, The AI writes:** this avoids arithmetic errors in the report.
+- **Bad data is kept and not deleted:** the Exceptions sheet gives a reviewer the reason for every rejected row.
+- **Failures never go unnoticed:** a dedicated alert workflow means a broken report never goes unnoticed.
 - **Row Level Security** is enabled on both tables, so they are not exposed through Supabase's public API. The workflow connects with the database login and is unaffected.
 
 ## Known limitations
