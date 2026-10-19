@@ -5,7 +5,7 @@ An n8n workflow that replaces a manual weekly reporting routine. Every Monday it
 
 All data in this project is fake and was created for demonstration.
 
-![Workflow canvas](images/01-workflow-canvas.png)
+![Workflow canvas](01-workflow-canvas.png)
 
 ## The problem
 
@@ -39,7 +39,7 @@ The main workflow has 10 nodes. After validation it splits: flagged rows go to t
 
 The error workflow has 2 more nodes: an **Error Trigger** that starts when the main workflow fails, and a **Gmail** node that sends the alert. One central error handler is simpler than adding error branches to every node.
 
-![Query node](images/06-sql-query-node.png)
+![Query node](06-sql-query-node.png)
 
 ## Data validation
 
@@ -53,29 +53,29 @@ The demo database holds 20 orders, 5 of them deliberately broken. Each row is ch
 
 **Result:** 20 rows in, 15 clean, 5 flagged, each with the reason it failed.
 
-![Validate rows output](images/03-validate-rows-output.png)
+![Validate rows output](03-validate-rows-output.png)
 
-![Exceptions log sheet](images/04-exceptions-sheet.png)
+![Exceptions log sheet](04-exceptions-sheet.png)
 
-![Clean orders table in Supabase](images/05-clean-orders-table.png)
+![Clean orders table in Supabase](05-clean-orders-table.png)
 
 ## The report email
 
 Kept minimal on purpose: one accent colour, grey labels, a short AI summary and a small table of key figures.
 
-![Weekly report email](images/07-report-email.png)
+![Weekly report email](07-report-email.png)
 
 ## Failure alerts
 
 If the main workflow fails, the alert email names the workflow, the node that failed, the error message, and links to the failed run.
 
-![Error workflow](images/02-error-workflow.png)
+![Error workflow](02-error-workflow.png)
 
-![Failure alert email](images/08-failure-alert-email.png)
+![Failure alert email](08-failure-alert-email.png)
 
 ## Successful run
 
-![Successful execution](images/09-successful-execution.png)
+![Successful execution](09-successful-execution.png)
 
 ## Setup
 
