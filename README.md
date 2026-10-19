@@ -1,24 +1,22 @@
 # Weekly-Sales-Report-workflow-on-n8n
 # Automated Weekly Sales Report (n8n + Supabase + AI)
 
-An n8n workflow that replaces a manual weekly reporting routine. Every Monday it pulls order data from a database, checks the data quality, saves the clean rows, logs the bad ones for review, writes a short AI summary, and emails a formatted report. If anything breaks, a separate workflow sends an alert.
+This is an n8n workflow that replaces a manual weekly reporting routine. Every Monday it pulls order data from a database, checks the data quality, saves the clean rows, logs the bad ones for review, writes a short AI summary, and emails a formatted report. If anything breaks, a separate workflow sends an alert.
 
 All data in this project is fake and was created for demonstration.
 
 ![Workflow canvas](01-workflow-canvas.png)
 
 ## The problem
-
-In many finance and operations teams, the weekly report is built by hand: export orders from the ERP into a spreadsheet, clean it, calculate totals, write a summary, and email it. It is slow, repetitive and error-prone. A single bad row can distort the totals, and a failed export can go unnoticed.
+In many finance and operations teams, the weekly reports are usually built by hand: export orders from the ERP into a spreadsheet, clean it, calculate totals, write a summary, and email it. It is slow, repetitive and error-prone. A single bad row can distort the totals, and a failed export can go unnoticed.
 
 ## The solution
-
 A scheduled workflow that does all of it automatically and handles problems openly:
 
-- Bad data is separated and logged with a reason, never silently dropped.
-- Report figures are calculated by code, so they are exact.
+- Bad data is separated and logged with a reason, and never dropped silently.
+- Report figures are calculated by code, so that they are exact.
 - The AI only writes the narrative around those figures and is told not to invent numbers.
-- If the workflow fails, a separate alert workflow tells someone straight away.
+- Incase the workflow fails, a separate alert workflow tells someone straight away.
 
 **Tools:** n8n Cloud, Supabase (PostgreSQL), Google Sheets, Gmail, OpenAI (GPT-5 mini).
 
@@ -26,7 +24,7 @@ A scheduled workflow that does all of it automatically and handles problems open
 
 The main workflow has 10 nodes. After validation it splits: flagged rows go to the Exceptions sheet, and clean rows continue on to the report.
 
-1. **Monday 8am trigger** starts the run on a schedule, so nobody has to remember it.
+1. **Monday 8am trigger** starts the run on a schedule.
 2. **Get last 14 days orders** queries Supabase with SQL and labels each row as this week or last week. The database does the filtering, and the label allows a week-over-week comparison without a second query.
 3. **Validate rows** is one Code node that checks every row against five rules and adds `issues` and `is_valid` fields. It runs on all rows at once because duplicate detection needs to see earlier rows.
 4. **Is row valid?** routes each row by reading the result of the previous step, so the rules live in one place only.
@@ -43,7 +41,7 @@ The error workflow has 2 more nodes: an **Error Trigger** that starts when the m
 
 ## Data validation
 
-The demo database holds 20 orders, 5 of them deliberately broken. Each row is checked for:
+The demo database holds 20 orders, 5 of them were broken deliberately. Each row is checked for:
 
 - Quantity greater than zero
 - Unit price greater than zero
@@ -61,7 +59,7 @@ The demo database holds 20 orders, 5 of them deliberately broken. Each row is ch
 
 ## The report email
 
-Kept minimal on purpose: one accent colour, grey labels, a short AI summary and a small table of key figures.
+The email was kept minimal, with a short AI summary and a small table of key figures.
 
 ![Weekly report email](07-report-email.png)
 
