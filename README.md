@@ -108,6 +108,6 @@ If the main workflow fails, the alert email names the workflow, the node that fa
 ## Author
 
 **[Oko Edgar]**
-[LinkedIn link] | [Email]
+[www.linkedin.com/in/edgar-oko-3861b9421] | [Edgaroko90@gmail.com]
 
 Available to work during US business hours.
